@@ -1,0 +1,178 @@
+{
+  "ip": "192.168.0.29",
+  "port": 5005,
+  "byteorder": "little",
+  "f0_hex": "4045248C2D5F3847",
+  "affine_counterexample": {
+    "a_seed_hex": "DFED09359650B582",
+    "b_seed_hex": "6AF1FCD7FA2F05FF",
+    "a_xor_b_seed_hex": "B51CF5E26C7FB07D",
+    "g(a)_hex": "3ED83674E2719147",
+    "g(b)_hex": "70035F62745E8A95",
+    "g(a)^g(b)_hex": "4EDB6916962F1BD2",
+    "g(a^b)_hex": "972DA5244A8412CD"
+  },
+  "samples": [
+    {
+      "seed_hex": "902F37BCBACFD100",
+      "key_hex": "36586B80E7DE46B3"
+    },
+    {
+      "seed_hex": "D4E97D2BDB1E48D7",
+      "key_hex": "0E26EBF9A2BBD90F"
+    },
+    {
+      "seed_hex": "387F24F60EEABA20",
+      "key_hex": "D9DE549F9685C1FC"
+    },
+    {
+      "seed_hex": "C0991F60A43F33D1",
+      "key_hex": "9401512049C36FE4"
+    },
+    {
+      "seed_hex": "0BB0922A5D3C7B4A",
+      "key_hex": "EF1E36653F951B3E"
+    },
+    {
+      "seed_hex": "8E48FCAB44177A81",
+      "key_hex": "6708FBC274F5A1EA"
+    },
+    {
+      "seed_hex": "190095BFFA2E30C4",
+      "key_hex": "72630EA989539654"
+    },
+    {
+      "seed_hex": "73AF041AC59249CE",
+      "key_hex": "AC75D1D37513BD2C"
+    },
+    {
+      "seed_hex": "5487BE2884B8E92C",
+      "key_hex": "739D5C6FCAAA1733"
+    },
+    {
+      "seed_hex": "FED2D332945C904C",
+      "key_hex": "3CF0781821A73D82"
+    },
+    {
+      "seed_hex": "CBA1A4900B367F99",
+      "key_hex": "8341731FE51158C8"
+    },
+    {
+      "seed_hex": "DFE84E109BCD9E0D",
+      "key_hex": "6D2583C6216F0987"
+    },
+    {
+      "seed_hex": "F0F4D747AA7DBEEA",
+      "key_hex": "09F368D00C4262B3"
+    },
+    {
+      "seed_hex": "37B1583B44E5597D",
+      "key_hex": "922F8A9BF13209E3"
+    },
+    {
+      "seed_hex": "42AA15A15ABB15B7",
+      "key_hex": "B14A7AD6F2ED342A"
+    },
+    {
+      "seed_hex": "71AAA936B83751A7",
+      "key_hex": "9852356DFD4D3382"
+    },
+    {
+      "seed_hex": "9FE96BB0DE3A1FC8",
+      "key_hex": "5533774A7FD43DD7"
+    },
+    {
+      "seed_hex": "36548DD830E86932",
+      "key_hex": "D43B0E89E3A7B99E"
+    },
+    {
+      "seed_hex": "EF17D5D45DF5AEAF",
+      "key_hex": "A0916A1E3A7CCB4C"
+    },
+    {
+      "seed_hex": "29C6F5B2C297308A",
+      "key_hex": "7DB247CAF7A25AE7"
+    },
+    {
+      "seed_hex": "89601B51056C3A19",
+      "key_hex": "66E07B180CAFDE7D"
+    },
+    {
+      "seed_hex": "E06DAB06086BFA93",
+      "key_hex": "2B65E82B019BE3DB"
+    },
+    {
+      "seed_hex": "50F03261E5A99FBB",
+      "key_hex": "70EA346AABE4922D"
+    },
+    {
+      "seed_hex": "B54B66F847237F2B",
+      "key_hex": "792E83C4AF037ECA"
+    },
+    {
+      "seed_hex": "75153B05FF60A5B0",
+      "key_hex": "E44BD41828225EA8"
+    },
+    {
+      "seed_hex": "DA6BFDA6184E7932",
+      "key_hex": "6BED877C3E05E96D"
+    },
+    {
+      "seed_hex": "1EEFD4945D6C22AF",
+      "key_hex": "96C38CEA24927582"
+    },
+    {
+      "seed_hex": "2EFB3AE680BFCD6F",
+      "key_hex": "851BEDF644591BCD"
+    },
+    {
+      "seed_hex": "3397FD502F8B427F",
+      "key_hex": "FCFE426DFA82DBE8"
+    },
+    {
+      "seed_hex": "B169737C2DD952B3",
+      "key_hex": "715FEB6B53E4FDBF"
+    },
+    {
+      "seed_hex": "2DF594C799EFF07F",
+      "key_hex": "3224D1E279F73C84"
+    },
+    {
+      "seed_hex": "95D35EDCC5893FA4",
+      "key_hex": "BF1408E68DE6D1D0"
+    },
+    {
+      "seed_hex": "12B2BF42959DA9A2",
+      "key_hex": "9AA1D8480B83464B"
+    },
+    {
+      "seed_hex": "FF55775971EDF716",
+      "key_hex": "A9D6339AB4AB6E49"
+    },
+    {
+      "seed_hex": "58C390A233E76F8F",
+      "key_hex": "F8CE119E3D89DEF3"
+    },
+    {
+      "seed_hex": "3595C59CD184DFC0",
+      "key_hex": "4239B9C02B8744B8"
+    },
+    {
+      "seed_hex": "45A71854C988C6CA",
+      "key_hex": "152C5809A7B09880"
+    },
+    {
+      "seed_hex": "F3ED22B9D09CB450",
+      "key_hex": "B764B673E4B2E735"
+    },
+    {
+      "seed_hex": "DBA195A96ACA5074",
+      "key_hex": "0FFCDBBF8525F53A"
+    },
+    {
+      "seed_hex": "036D7870E5DDE6F1",
+      "key_hex": "BB5370F47629D508"
+    }
+  ],
+  "note": "Non-linear suspected. Use these samples for further analysis (byte influence, avalanche, brute candidates, etc.)."
+}

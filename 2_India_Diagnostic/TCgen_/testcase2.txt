@@ -1,0 +1,19 @@
+#TC_ID/PC_ID , Testcase_Description, Service_ID, SubService_ID, Expected_Response_Data, Write_Data, Addressing, Format, Status_Mask, Communication_Type, controltype
+ECU_INFO-1 , Platform Software Version,0x22,0xF17F,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-2 , Platform Hardwae Version,0x22,0xF17D,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-3 , Vehicle Part Number,0x22,0xF187,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-4 , ECU Software UNIT1 Version Data Identifier,0x22,0xF1B1,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-5 , Vehicle Manufacturer ECU Hardware Number DataIdentifier,0x22,0xF191,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-6 , System Supplier ECU Hardware Version Number DataIdentifier ,0x22,0xF193,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-7 , Supplier H/W Manufacturing Date,0x22,0xF18B,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-8 , Serial Number,0x22,0xF18C,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-9 , ECUSupplierCodeDataIdentifier ,0x22,0xF1A1,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-10 , LocalRXSWINDataIdentifier,0x22,0xF1EF,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-11 , ECU Option Information 1 for Master Code ,0x22,0xD401,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-12 , ECU Option Information 2 for Master Code,0x22,0xD402,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-13 , ECU Option Information 3 for Master Code,0x22,0xD403,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-14 , ECU Option Information 4 for Master Code,0x22,0xD404,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-15 , System Name,0x22,0xF197,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-16 , ECU Software UNIT Version Data Identifier,0x22,0xF1B0,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-17 , BodyCANDataBaseVersionNumBErDataIdentifier,0x22,0xF100,nan,nan,Physical,ASCII,nan,nan,nan
+ECU_INFO-18 , ECUSoftwareUnit1IVDDataIdentifier,0x22,0xF1C1,nan,nan,Physical,ASCII,nan,nan,nan

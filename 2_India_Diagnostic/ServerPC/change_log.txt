@@ -1,0 +1,4 @@
+SWC Name : Commmon Diagnostic Raspberry pi
+Change log:
+25'06/09:D.02.01
+Added Timestamp in the DLL Server code for each request received from Raspberry Pi.

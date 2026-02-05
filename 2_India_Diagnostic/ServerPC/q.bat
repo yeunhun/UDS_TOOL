@@ -1,0 +1,1 @@
+gcc -std=c99 Dll_Updated_MASEC.c -o Dll_Server.exe -I. -lws2_32

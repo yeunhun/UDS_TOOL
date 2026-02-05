@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head><title>UDS Diagnostic Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { font-family: Arial; margin: 20px; }
+  .pass { color: green; font-weight: bold; }
+  .fail { color: red; font-weight: bold; }
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 20px;
+  }
+  .summary-block { text-align: left; min-width: 250px; }
+  #chart-container { width: 300px; }
+  table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+  th, td { border: 1px solid #ccc; padding: 8px; }
+  th { background: #f0f0f0; }
+  summary { font-weight: bold; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1 style="text-align: center;">UDS Diagnostic Report</h1>
+
+<div style="display: flex; justify-content: flex-start; align-items: flex-start; gap: 40px; margin-top: 20px; padding-left: 10px;">
+    <div style="width: 650px;">
+    
+        <p><strong>Target ECU:</strong> WPC2</p>
+        <p><strong>Platform Version Number DataIdentifier:</strong> 23.10.04.0A.00</p><p><strong>Platform Hardware Version Number DataIdentifier:</strong> 05.01.01.01</p><p><strong>Vehicle Manufacturer Spare Part Number DataIdentifier:</strong> 95560DC000</p><p><strong>ECU Software UNIT1 Version Data Identifier:</strong> 25A10</p><p><strong>Vehicle Manufacturer ECU Hardware Number DataIdentifier:</strong> B.00</p><p><strong>System Supplier ECU Hardware Version Number DataIdentifier:</strong> B.00</p><p><strong>ECU Manufacturing Date DataIdentifier:</strong> FF FF FF FF</p><p><strong>ECU Serial Number Data Identifier:</strong> FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF</p><p><strong>ECU Supplier Code DataIdentifier:</strong> S110</p><p><strong>LocalRXSWINDataIdentifier:</strong> 07 25 0B 52 31 30 20 4A 47 31 2F 31 2F 30 0C 52 31 35 35 20 4A 47 31 2F 31 2F 30 0C 52 31 35 36 20 4A 47 31 2F 31 2F 30</p><p><strong>ECU Option Information 1 for Master Code:</strong> Error: Unexpected response: [ 7F, 22, 31 ]</p><p><strong>ECU Option Information 2 for Master Code:</strong> Error: Unexpected response: [ 7F, 22, 31 ]</p><p><strong>ECU Option Information 3 for Master Code:</strong> Error: Unexpected response: [ 7F, 22, 31 ]</p><p><strong>ECU Option Information 4 for Master Code:</strong> Error: Unexpected response: [ 7F, 22, 31 ]</p><p><strong>System Name Or Engine Type DataIdentifier:</strong> WPC</p><p><strong>ECU Software UNIT Version Data Identifier:</strong> 01</p><p><strong>CAN Data Base Version Number DataIdentifier:</strong> 1.00</p><p><strong>ECUSoftwareUnit1IVDDataIdentifier:</strong> FD 0A 23 5A F4 22 91 19 A0 64 5F 3E 8F E9 29 66 BC 03 C2 72 79 22 A7 6A C6 AD CB 92 78 73 79 02</p>
+        
+        <hr style="width: 300px;border:1px solid #999; margin:25px 0;">
+        
+        <p><strong>Generated:</strong> 2026-01-31 14:42:44</p>
+        <p><strong>CAN Log File:</strong> CANLog_Testcase_20260131_144236.asc</p>
+        <p><strong>Total Test Cases:</strong> 42</p>
+        <p class="pass"><strong>Passed:</strong> 42</p>
+        <p class="fail"><strong>Failed:</strong> 0</p>
+        <p><strong>Start_Time:</strong> 0.197 seconds</p>
+        <p><strong>End_Time:</strong> 5.838 seconds</p>
+        <p><strong>Test Duration:</strong> 5.642 seconds</p>
+        
+    </div>
+    <button onclick="document.querySelectorAll('.case-block').forEach(el => el.style.display='');">Show All</button>
+    <div id="chart-container" style="width: 320px; margin-left:70px;">
+        <canvas id="passFailChart" width="300" height="300"></canvas>
+    </div>
+</div>
+
+    <script>
+        const ctx = document.getElementById('passFailChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Passed', 'Failed'],
+                datasets: [{
+                    data: [42, 0],
+                    backgroundColor: ['#4CAF50', '#F44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                onClick: function (evt, item) {
+                    const segment = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+                    if (!segment.length) return;
+                    const label = chart.data.labels[segment[0].index];
+                    document.querySelectorAll('.case-block').forEach(el => el.style.display = 'none');
+                    if (label === 'Passed') {
+                        document.querySelectorAll('.pass-case').forEach(el => el.style.display = '');
+                    } else if (label === 'Failed') {
+                        document.querySelectorAll('.fail-case').forEach(el => el.style.display = '');
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Test Case Results' }
+                }
+            }
+        });
+    </script>
+
+    <hr><br>
+    <div class='case-block skip-case'>
+<details><summary>ECU_INFO_1 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Platform Version Number DataIdentifier</td><td>0.000000</td><td>Request Sent</td><td>03 22 F1 7F</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.132959</td><td>Response Received</td><td>10 11 62 F1 7F 32 33 2E 31 30 2E 30 34 2E 30 41 2E 30 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 7F 32 33 2E 31 30 2E 30 34 2E 30 41 2E 30 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_2 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Platform Hardware Version Number DataIdentifier</td><td>0.196519</td><td>Request Sent</td><td>03 22 F1 7D</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.327963</td><td>Response Received</td><td>10 0E 62 F1 7D 30 35 2E 30 31 2E 30 31 2E 30 31<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 7D 30 35 2E 30 31 2E 30 31 2E 30 31</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_3 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Vehicle Manufacturer Spare Part Number DataIdentifier</td><td>0.389183</td><td>Request Sent</td><td>03 22 F1 87</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.412987</td><td>Response Received</td><td>10 0D 62 F1 87 39 35 35 36 30 44 43 30 30 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 87 39 35 35 36 30 44 43 30 30 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO-4 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Software UNIT1 Version Data Identifier</td><td>0.476499</td><td>Request Sent</td><td>03 22 F1 B1</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.508019</td><td>Response Received</td><td>10 08 62 F1 B1 32 35 41 31 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 B1 32 35 41 31 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_5 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Vehicle Manufacturer ECU Hardware Number DataIdentifier</td><td>0.571867</td><td>Request Sent</td><td>03 22 F1 91</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.587970</td><td>Response Received</td><td>07 62 F1 91 42 2E 30 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 91 42 2E 30 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_6 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>System Supplier ECU Hardware Version Number DataIdentifier</td><td>0.649386</td><td>Request Sent</td><td>03 22 F1 93</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.668018</td><td>Response Received</td><td>07 62 F1 93 42 2E 30 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 93 42 2E 30 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_7 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Manufacturing Date DataIdentifier</td><td>0.731251</td><td>Request Sent</td><td>03 22 F1 8B</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.748017</td><td>Response Received</td><td>07 62 F1 8B FF FF FF FF<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 8B FF FF FF FF</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_8 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Serial Number Data Identifier</td><td>0.809831</td><td>Request Sent</td><td>03 22 F1 8C</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>0.938038</td><td>Response Received</td><td>10 12 62 F1 8C FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 8C FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_9 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Supplier Code DataIdentifier</td><td>0.999219</td><td>Request Sent</td><td>03 22 F1 A1</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>1.018038</td><td>Response Received</td><td>07 62 F1 A1 53 31 31 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 A1 53 31 31 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_10 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>LocalRXSWINDataIdentifier</td><td>1.082297</td><td>Request Sent</td><td>03 22 F1 EF</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>1.633025</td><td>Response Received</td><td>10 2B 62 F1 EF 07 25 0B 52 31 30 20 4A 47 31 2F 31 2F 30 0C 52 31 35 35 20 4A 47 31 2F 31 2F 30 0C 52 31 35 36 20 4A 47 31 2F 31 2F 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 EF 07 25 0B 52 31 30 20 4A 47 31 2F 31 2F 30 0C 52 31 35 35 20 4A 47 31 2F 31 2F 30 0C 52 31 35 36 20 4A 47 31 2F 31 2F 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_11 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Option Information 1 for Master Code</td><td>1.696192</td><td>Request Sent</td><td>03 22 D4 01</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>1.718067</td><td>Response Received</td><td>03 7F 22 31<br><b>Expected:</b> -<br><b>Actual:</b> 7F 22 31</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_12 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Option Information 2 for Master Code</td><td>1.781124</td><td>Request Sent</td><td>03 22 D4 02</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>1.798008</td><td>Response Received</td><td>03 7F 22 31<br><b>Expected:</b> -<br><b>Actual:</b> 7F 22 31</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_13 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Option Information 3 for Master Code</td><td>1.859572</td><td>Request Sent</td><td>03 22 D4 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>1.878450</td><td>Response Received</td><td>03 7F 22 31<br><b>Expected:</b> -<br><b>Actual:</b> 7F 22 31</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_14 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Option Information 4 for Master Code</td><td>1.944428</td><td>Request Sent</td><td>03 22 D4 04</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>1.958119</td><td>Response Received</td><td>03 7F 22 31<br><b>Expected:</b> -<br><b>Actual:</b> 7F 22 31</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_15 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>System Name Or Engine Type DataIdentifier</td><td>2.020962</td><td>Request Sent</td><td>03 22 F1 97</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.038042</td><td>Response Received</td><td>07 62 F1 97 57 50 43 20<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 97 57 50 43 20</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_16 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECU Software UNIT Version Data Identifier</td><td>2.100520</td><td>Request Sent</td><td>03 22 F1 B0</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.118083</td><td>Response Received</td><td>04 62 F1 B0 01<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 B0 01</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_17 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>CAN Data Base Version Number DataIdentifier</td><td>2.179919</td><td>Request Sent</td><td>03 22 F1 00</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.198020</td><td>Response Received</td><td>07 62 F1 00 31 2E 30 30<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 00 31 2E 30 30</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_INFO_18 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>ECUSoftwareUnit1IVDDataIdentifier</td><td>2.259884</td><td>Request Sent</td><td>03 22 F1 C1</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.708049</td><td>Response Received</td><td>10 23 62 F1 C1 FD 0A 23 5A F4 22 91 19 A0 64 5F 3E 8F E9 29 66 BC 03 C2 72 79 22 A7 6A C6 AD CB 92 78 73 79 02<br><b>Expected:</b> -<br><b>Actual:</b> 62 F1 C1 FD 0A 23 5A F4 22 91 19 A0 64 5F 3E 8F E9 29 66 BC 03 C2 72 79 22 A7 6A C6 AD CB 92 78 73 79 02</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block pass-case'>
+<details><summary>SEC_ACC_01 - <span class='pass'>Pass</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Start default session</td><td>2.770940</td><td>Request Sent</td><td>02 10 01</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.788044</td><td>Response Received</td><td>06 50 01 00 32 01 F4<br><b>Expected:</b> 50 01 00 32 01 F4<br><b>Actual:</b> 50 01 00 32 01 F4</td><td>Pass</td><td></td></tr>
+</table></details></div>
+<div class='case-block pass-case'>
+<details><summary>SEC_ACC_02 - <span class='pass'>Pass</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Start Extended session(10 03)</td><td>2.800629</td><td>Request Sent</td><td>02 10 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.818116</td><td>Response Received</td><td>06 50 03 00 32 01 F4<br><b>Expected:</b> 50 03 00 32 01 F4<br><b>Actual:</b> 50 03 00 32 01 F4</td><td>Pass</td><td></td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>SEC_ACC_03 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Request Seed Tester to ECU</td><td>2.830639</td><td>Request Sent</td><td>02 27 11</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.858111</td><td>Response Received</td><td>10 0A 67 11 4A 0F D2 28 68 C5 89 70<br><b>Expected:</b> -<br><b>Actual:</b> 67 11 4A 0F D2 28 68 C5 89 70</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>SEC_ACC_04 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Send Key Tester to ECU</td><td>2.923485</td><td>Request Sent</td><td>27 12 77 B5 7F C3 74 7D D3 1B</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>2.948105</td><td>Response Received</td><td>02 67 12<br><b>Expected:</b> -<br><b>Actual:</b> 67 12</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block pass-case'>
+<details><summary>SEC_ACC_05 - <span class='pass'>Pass</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>TEST PRESENT</td><td>3.008910</td><td>Request Sent</td><td>02 3E 00</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.018110</td><td>Response Received</td><td>02 7E 00<br><b>Expected:</b> 7E<br><b>Actual:</b> 7E</td><td>Pass</td><td></td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_ID_01 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Read ECU Identification Service</td><td>3.029954</td><td>Request Sent</td><td>03 22 ED 90</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.263083</td><td>Response Received</td><td>10 16 62 ED 90 D4 46 FF FF 3B 00 00 00 00 07 00 00 00 08 00 00 00 01 0F<br><b>Expected:</b> -<br><b>Actual:</b> 62 ED 90 D4 46 FF FF 3B 00 00 00 00 07 00 00 00 08 00 00 00 01 0F</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_SEN_01 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Input Output Record Local Identifier #1(Byte Data)</td><td>3.326244</td><td>Request Sent</td><td>03 22 BE 02</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.563109</td><td>Response Received</td><td>10 17 62 BE 02 FE 40 00 00 00 00 00 5B 5A 00 41 00 00 00 00 00 00 00 40 00<br><b>Expected:</b> -<br><b>Actual:</b> 62 BE 02 FE 40 00 00 00 00 00 5B 5A 00 41 00 00 00 00 00 00 00 40</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_SEN_02 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Input Output Record Local Identifier #2(Bit Data)</td><td>3.626509</td><td>Request Sent</td><td>03 22 BE 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.653146</td><td>Response Received</td><td>10 0D 62 BE 03 F6 00 00 00 01 00 00 00 00 00<br><b>Expected:</b> -<br><b>Actual:</b> 62 BE 03 F6 00 00 00 01</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_15 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>Supported Input Output Local Identifier A(X) B(X) C(O) D(O)</td><td>3.717457</td><td>Request Sent</td><td>04 2F F0 10 02</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.733148</td><td>Response Received</td><td>10 08 6F F0 10 02 00 00 E0 00<br><b>Expected:</b> -<br><b>Actual:</b> 6F F0 10 02 00 00 E0</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_01 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START AMBER LED 1s ON 1s Off 5회 반복   in IGN1 ON</td><td>3.795614</td><td>Request Sent</td><td>05 2F F0 11 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.808130</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START AMBER LED 1s ON 1s Off 5회 반복   in IGN1 ON</td><td>3.869328</td><td>Request Sent</td><td>04 2F F0 11 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>3.878547</td><td>Response Received</td><td>03 7F 2F 22<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 22</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_02 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  GREEN LED  1s ON 1s Off 5회 반복   in IGN1 ON</td><td>3.942055</td><td>Request Sent</td><td>05 2F F0 12 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>3.948122</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  GREEN LED  1s ON 1s Off 5회 반복   in IGN1 ON</td><td>4.012695</td><td>Request Sent</td><td>04 2F F0 12 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.018142</td><td>Response Received</td><td>03 7F 2F 22<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 22</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_03 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  FAN ON  5s동안 FAN Duty 50% 동작</td><td>4.080358</td><td>Request Sent</td><td>05 2F F0 13 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.088080</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  FAN ON  5s동안 FAN Duty 50% 동작</td><td>4.149826</td><td>Request Sent</td><td>04 2F F0 13 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.158145</td><td>Response Received</td><td>03 7F 2F 22<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 22</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_04 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  OFF 후  OFF 상태 유지</td><td>4.221245</td><td>Request Sent</td><td>05 2F F0 14 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.228156</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  OFF 후  OFF 상태 유지</td><td>4.289560</td><td>Request Sent</td><td>04 2F F0 14 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.298129</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>5</td><td>WCT(충전IC) S/W Reprogram</td><td>4.359760</td><td>Request Sent</td><td>04 2F F0 21 00</td><td></td><td>-</td></tr>
+<tr><td>6</td><td></td><td>4.368159</td><td>Response Received</td><td>04 6F F0 21 00<br><b>Expected:</b> -<br><b>Actual:</b> 6F F0 21</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_05 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START   10% DUTY 지속 출력</td><td>4.431369</td><td>Request Sent</td><td>05 2F F0 15 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.438172</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START   10% DUTY 지속 출력</td><td>4.498967</td><td>Request Sent</td><td>04 2F F0 15 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.508142</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_06 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  20% DUTY 지속 출력</td><td>4.569816</td><td>Request Sent</td><td>05 2F F0 16 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.578166</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  20% DUTY 지속 출력</td><td>4.643070</td><td>Request Sent</td><td>04 2F F0 16 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.648168</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_07 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  30% DUTY 지속 출력</td><td>4.709570</td><td>Request Sent</td><td>05 2F F0 17 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.718152</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  30% DUTY 지속 출력</td><td>4.779373</td><td>Request Sent</td><td>04 2F F0 17 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.788120</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_08 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  40% DUTY 지속 출력</td><td>4.851355</td><td>Request Sent</td><td>05 2F F0 18 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.858203</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  40% DUTY 지속 출력</td><td>4.919901</td><td>Request Sent</td><td>04 2F F0 18 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>4.928153</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_09 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  50% DUTY 지속 출력</td><td>4.989480</td><td>Request Sent</td><td>05 2F F0 19 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>4.998192</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  50% DUTY 지속 출력</td><td>5.064600</td><td>Request Sent</td><td>04 2F F0 19 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>5.068221</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_10 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  60% DUTY 지속 출력</td><td>5.133599</td><td>Request Sent</td><td>05 2F F0 1A 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>5.138162</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  60% DUTY 지속 출력</td><td>5.199328</td><td>Request Sent</td><td>04 2F F0 1A 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>5.208179</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_11 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  70% DUTY 지속 출력</td><td>5.269836</td><td>Request Sent</td><td>05 2F F0 1B 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>5.278568</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  70% DUTY 지속 출력</td><td>5.339640</td><td>Request Sent</td><td>04 2F F0 1B 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>5.348172</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_12 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  80% DUTY 지속 출력</td><td>5.410296</td><td>Request Sent</td><td>05 2F F0 1C 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>5.418196</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  80% DUTY 지속 출력</td><td>5.478547</td><td>Request Sent</td><td>04 2F F0 1C 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>5.488135</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_13 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  90% DUTY 지속 출력</td><td>5.549935</td><td>Request Sent</td><td>05 2F F0 1D 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>5.558182</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  90% DUTY 지속 출력</td><td>5.620801</td><td>Request Sent</td><td>04 2F F0 1D 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>5.628197</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>ECU_DRV_14 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>START  100% DUTY 지속 출력</td><td>5.691357</td><td>Request Sent</td><td>05 2F F0 1E 03 03</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>5.698190</td><td>Response Received</td><td>03 7F 2F 13<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 13</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+<tr><td>3</td><td>START  100% DUTY 지속 출력</td><td>5.758449</td><td>Request Sent</td><td>04 2F F0 1E 00</td><td></td><td>-</td></tr>
+<tr><td>4</td><td></td><td>5.768187</td><td>Response Received</td><td>03 7F 2F 11<br><b>Expected:</b> -<br><b>Actual:</b> 7F 2F 11</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+<div class='case-block skip-case'>
+<details><summary>RD_DTC_01 - <span class='skip'>Skip</span></summary>
+<table><tr><th>Step</th><th>Description</th><th>Timestamp</th><th>Type</th><th>Data</th><th>Status</th><th>Failure Reason</th></tr>
+<tr><td>1</td><td>0x02  ReportDTCByStatusMask 0xFF All DTC</td><td>5.829396</td><td>Request Sent</td><td>03 19 02 FF</td><td></td><td>-</td></tr>
+<tr><td>2</td><td></td><td>5.838197</td><td>Response Received</td><td>03 59 02 09<br><b>Expected:</b> -<br><b>Actual:</b> 59 02 09</td><td>Skip</td><td>Expected empty (verification skipped)</td></tr>
+</table></details></div>
+</body></html>

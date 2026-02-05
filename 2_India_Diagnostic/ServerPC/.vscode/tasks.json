@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Security_Rasberry (MinGW)",
+            "type": "shell",
+            "command": "D:\\C\\mingw32\\bin\\gcc.exe",
+            "args": [
+                "-std=c99",
+                "-g",
+                "-O0",
+                "Dll_Updated_MASEC.c",
+                "-I.",
+                "-o",
+                "Security_Rasberry.exe",
+                "-lws2_32"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Build active file (MinGW) - optional",
+            "type": "shell",
+            "command": "D:\\C\\mingw32\\bin\\gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-O0",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-lws2_32"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        }
+    ]
+}
